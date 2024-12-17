@@ -1,3 +1,4 @@
 pycryptodome
 xlsxwriter
 sectools>=1.4.1
+ldap3
