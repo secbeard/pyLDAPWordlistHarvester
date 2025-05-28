@@ -4,6 +4,8 @@
 
 Param (
     [parameter(Mandatory=$true)][string]$dcip = $null,
+    [parameter(Mandatory=$false)][string]$outputFile = "wordlist.txt",
+    [parameter(Mandatory=$false)][switch]$overwrite,
     [parameter(Mandatory=$false,ParameterSetName="Credentials")][System.Management.Automation.PSCredential]$Credentials,
     [parameter(Mandatory=$false,ParameterSetName="Credentials")][Switch]$UseCredentials,
     [parameter(Mandatory=$false)][switch]$LDAPS,
@@ -227,11 +229,12 @@ try {
     }
     Write-Host (" └──[+] Added {0} unique words to wordlist." -f $added)
 
-
     # Exporting output
-    $outputFile = "wordlist.txt"
-    Write-Host ("[+] Writing {0} words to {1} ... " -f $wordList.Lenght, $outputFile)
-    $wordList | Out-File -FilePath $outputFile -Encoding UTF8
+    if ($overwrite) {
+        $wordList | Sort-Object -Unique | Out-File -FilePath $outputFile -Encoding UTF8 -Force
+    } else {
+        $wordList | Sort-Object -Unique | Out-File -FilePath $outputFile -Encoding UTF8
+    }
 
 } catch {
     Write-Verbose $_.Exception
