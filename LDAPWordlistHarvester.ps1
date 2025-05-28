@@ -27,6 +27,9 @@ If ($Help) {
     Write-Host "  -UseCredentials   : Flag for asking for credentials to authentication"
     Write-Host "  -Credentials      : Providing PSCredentialObject for authentication"
     Write-Host "  -LDAPS            : Use LDAPS instead of LDAP."
+    Write-Host "  -outputFile       : Specify output file path, ex: c:\tmp\output.txt"
+    Write-Host "  -overwrite        : Overwrite output file if present."
+    Write-Host "  -LDAPS            : Use LDAPS instead of LDAP."
     exit 0
 }
 
